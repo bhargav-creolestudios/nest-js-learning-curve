@@ -18,5 +18,5 @@ export class CreateCustomerDto {
 
 	readonly description: string;
 
-	readonly created_at: Date;
+	readonly created_at: string;
 }

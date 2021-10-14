@@ -22,7 +22,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="customer in customers" :key="customer._id">
+          <tr v-for="customer in customers" :key="customer.id">
             <td>{{ customer.first_name }}</td>
             <td>{{ customer.last_name }}</td>
             <td>{{ customer.email }}</td>
@@ -33,13 +33,13 @@
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group" style="margin-bottom: 20px">
                   <router-link
-                    :to="{ name: 'Edit', params: { id: customer._id } }"
+                    :to="{ name: 'Edit', params: { id: customer.id } }"
                     class="btn btn-sm btn-outline-secondary"
                     >Edit Customer
                   </router-link>
                   <button
                     class="btn btn-sm btn-outline-secondary"
-                    v-on:click="deleteCustomer(customer._id)"
+                    v-on:click="deleteCustomer(customer.id)"
                   >
                     Delete Customer
                   </button>
