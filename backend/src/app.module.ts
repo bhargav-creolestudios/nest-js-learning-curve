@@ -3,13 +3,9 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { CustomerModule } from './customer/customer.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { MulterModule } from '@nestjs/platform-express';
 
 @Module({
   imports: [
-    MulterModule.register({
-      dest: './uploads'
-    }),
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: 'localhost',

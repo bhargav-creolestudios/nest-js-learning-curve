@@ -9,17 +9,9 @@ export class CustomerController {
 
 	// add a customer
 	@Post('/create')
-	@UseInterceptors(
-		FileInterceptor('image'),
-	)
 	@UsePipes(ValidationPipe)
 	async addCustomer(@Res() res, @Body() createCustomerDto: CreateCustomerDto, @UploadedFile() image) {
 		const customer = await this.customerService.addCustomer(createCustomerDto);
-
-		const response = {
-			originalName: image.originalName,
-			fileName: image.fileName
-		}
 
 		return res.status(HttpStatus.OK).json({
 			message: "Customer has been created successfully",
