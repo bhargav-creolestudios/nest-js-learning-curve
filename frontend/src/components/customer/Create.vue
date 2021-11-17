@@ -69,6 +69,12 @@
             placeholder="Enter Description"
           />
         </div>
+
+        <div class="form-group col-md-12">
+          <label for="formFile" class="form-label">Upload Files</label>
+          <input class="form-control" name="files" type="file" id="formFile" multiple />
+        </div>
+
         <div class="form-group col-md-4 pull-right">
           <button class="btn btn-success" type="submit">Create Customer</button>
         </div>

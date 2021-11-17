@@ -1,7 +1,9 @@
-import { Body, Controller, Get, HttpStatus, NotFoundException, Param, Post, Res, Put, Delete, Query, UsePipes, ValidationPipe, UseInterceptors, UploadedFile } from '@nestjs/common';
-import { FileInterceptor } from '@nestjs/platform-express';
+import { Body, Controller, Get, HttpStatus, NotFoundException, Param, Post, Res, Put, Delete, Query, UsePipes, ValidationPipe, UseInterceptors, UploadedFiles } from '@nestjs/common';
+import { FilesInterceptor } from '@nestjs/platform-express';
 import { CustomerService } from './customer.service';
 import { CreateCustomerDto } from './dto/create-customer.dto';
+import { diskStorage } from 'multer';
+import { Helper } from '../shared/helper'; 
 
 @Controller('customer')
 export class CustomerController {
@@ -10,16 +12,16 @@ export class CustomerController {
 	// add a customer
 	@Post('/create')
 	@UseInterceptors(
-		FileInterceptor('image'),
+		FilesInterceptor('files', 10, {
+			storage: diskStorage({
+				destination: Helper.fileDirectory,
+				filename: Helper.fileName,
+			})
+		}),
 	)
 	@UsePipes(ValidationPipe)
-	async addCustomer(@Res() res, @Body() createCustomerDto: CreateCustomerDto, @UploadedFile() image) {
+	async addCustomer(@Res() res, @Body() createCustomerDto: CreateCustomerDto, @UploadedFiles() files) {
 		const customer = await this.customerService.addCustomer(createCustomerDto);
-
-		const response = {
-			originalName: image.originalName,
-			fileName: image.fileName
-		}
 
 		return res.status(HttpStatus.OK).json({
 			message: "Customer has been created successfully",

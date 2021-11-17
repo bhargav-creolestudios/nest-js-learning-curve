@@ -23,6 +23,9 @@ export class Customer {
 	@Column({length: 100})
 	description: string;
 
+	@Column()
+	files: string;
+
 	@Column({ default: new Date().toLocaleDateString(undefined, {
 		day: '2-digit',
 		month: '2-digit',

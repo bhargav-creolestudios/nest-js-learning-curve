@@ -18,5 +18,7 @@ export class CreateCustomerDto {
 
 	readonly description: string;
 
+	readonly files: string;
+
 	readonly created_at: string;
 }
